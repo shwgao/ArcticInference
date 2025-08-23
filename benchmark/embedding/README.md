@@ -15,7 +15,7 @@ python benchmark.py [options]
 #### Options
 
 - `--server ADDRESS`: Server address in the format `host:port` (default: localhost:50050)
-- `--model MODEL_NAME`: Model name to use for encoding (default: Snowflake/snowflake-arctic-embed-m-v1.5)
+- `--model MODEL_NAME`: Model name to use for encoding (default: meta-llama/Llama-3.1-8B-Instruct)
 - `--batch-sizes SIZES`: Comma-separated list of batch sizes to test (default: 1,4,16,64)
 - `--requests N`: Number of requests per batch size (default: 1024)
 - `--concurrency N`: Maximum number of concurrent requests (default: 16)
@@ -32,10 +32,10 @@ python benchmark.py
 python benchmark.py --server 0.0.0.0:50050 --batch-sizes 1,4,16,64 --concurrency 64
 
 # Specify a different model
-python benchmark.py --model "Snowflake/snowflake-arctic-embed-m-v1.5"
+python benchmark.py --model "meta-llama/Llama-3.1-8B-Instruct"
 
 # The command we use for benchmarking on H200
-python benchmark.py --model "Snowflake/snowflake-arctic-embed-m-v1.5" \
+python benchmark.py --model "meta-llama/Llama-3.1-8B-Instruct" \
     --server localhost:50050 \
     --batch-sizes 1,16,64 \
     --requests 10240 \
@@ -93,7 +93,7 @@ python benchmark_http.py [options]
 #### Options
 
 - `--server ADDRESS`: Server address including protocol (default: http://localhost:8000)
-- `--model MODEL_NAME`: Model name to use for embedding (default: Snowflake/snowflake-arctic-embed-m-v1.5)
+- `--model MODEL_NAME`: Model name to use for embedding (default: meta-llama/Llama-3.1-8B-Instruct)
 - `--endpoint ENDPOINT`: API endpoint for embeddings (default: v1/embeddings)
 - `--batch-sizes SIZES`: Comma-separated list of batch sizes to test (default: 1,4,16,64)
 - `--requests N`: Number of requests per batch size (default: 1024)
@@ -125,10 +125,10 @@ First, start the vLLM server and the arctic_inference server:
 
 ```bash
 # Start the vLLM server
-vllm serve Snowflake/snowflake-arctic-embed-m-v1.5
+vllm serve meta-llama/Llama-3.1-8B-Instruct
 
 # Start the arctic_inference server
-python -m arctic_inference.embedding.replica_manager --model Snowflake/snowflake-arctic-embed-m-v1.5 --port 50050
+python -m arctic_inference.embedding.replica_manager --model meta-llama/Llama-3.1-8B-Instruct --port 50050
 ```
 
 ```bash
