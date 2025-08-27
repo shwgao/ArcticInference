@@ -24,7 +24,9 @@ llm = LLM(
     tensor_parallel_size=1,
     # pipeline_parallel_size=2,
     ulysses_sequence_parallel_size=2,
-    shift_parallel_threshold=512,
+    shift_parallel_threshold=64,
+    enable_shift_parallel=True,
+    enforce_eager=True,
 )
 
 print("=" * 80)
@@ -40,7 +42,7 @@ conversation = [
     },
     {
         "role": "user",
-        "content": "Write an essay about the importance of higher education.",
+        "content": "Write an essay about the importance of higher education."*100,
     },
 ]
 
