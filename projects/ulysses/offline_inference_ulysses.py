@@ -27,6 +27,7 @@ llm = LLM(
     shift_parallel_threshold=64,
     enable_shift_parallel=True,
     enforce_eager=True,
+    max_num_seqs=64,
 )
 
 print("=" * 80)
@@ -48,6 +49,7 @@ conversation = [
 
 sampling_params = SamplingParams(temperature=0.1, max_tokens=800)
 
-outputs = llm.chat(conversation, sampling_params=sampling_params)
+outputs = llm.generate([conversation, conversation], sampling_params=sampling_params)
 
 print(outputs[0].outputs[0].text)
+print(outputs[1].outputs[0].text)
