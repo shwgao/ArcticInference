@@ -32,6 +32,16 @@ llm = LLM(
 
 print("=" * 80)
 
+def format_conversation_to_prompt(conversation):
+    """Convert conversation format to a text prompt that vLLM can understand."""
+    prompt = ""
+    for message in conversation:
+        if message["role"] == "user":
+            prompt += f"<|user|>\n{message['content']}\n<|assistant|>\n"
+        elif message["role"] == "assistant":
+            prompt += f"{message['content']}\n"
+    return prompt
+
 conversation = [
     {
         "role": "user",
@@ -47,9 +57,13 @@ conversation = [
     },
 ]
 
+# Convert conversations to prompts
+prompt1 = format_conversation_to_prompt(conversation)
+prompt2 = format_conversation_to_prompt(conversation)
+
 sampling_params = SamplingParams(temperature=0.1, max_tokens=800)
 
-outputs = llm.generate([conversation, conversation], sampling_params=sampling_params)
+outputs = llm.generate([prompt1, prompt2], sampling_params=sampling_params)
 
 print(outputs[0].outputs[0].text)
 print(outputs[1].outputs[0].text)
