@@ -1,11 +1,11 @@
 MODEL="meta-llama/Llama-3.1-8B-Instruct" 
-TP=2 
+TP=1 
 PP=1 
 DP=1
 MAX_MODEL_LEN=128000 
 OUTPUT_LEN=128 
-RESULTS_FILE="benchmark_throughput_2tp_1pp_1node_2gpus.csv" 
-OUTPUT_FILE="benchmark_throughput_2tp_1pp_1node_2gpus.txt" 
+RESULTS_FILE="benchmark_throughput_1tp_1pp_1node_1gpu.csv" 
+OUTPUT_FILE="benchmark_throughput_1tp_1pp_1node_1gpu.txt" 
 
 # 设置vllm路径
 VLLM_PATH="/nfs/hpc/share/gaosho/conda_envs/arctic-inference/bin/vllm"
@@ -13,7 +13,7 @@ VLLM_PATH="/nfs/hpc/share/gaosho/conda_envs/arctic-inference/bin/vllm"
 # 参数列表
 chunk_prefill_list=(8192)
 input_len_list=(1000 5000 10000 40000 50000 80000 100000)
-batch_size_list=(2)
+batch_size_list=(1)
 
 # 写表头
 echo "chunk_prefill,input_len,batch_size,throughput_requests,throughput_total_tokens,throughput_output_tokens" > $RESULTS_FILE
